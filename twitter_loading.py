@@ -22,10 +22,11 @@ twitter_stream = TwitterStream(auth=oauth)
 # Get a sample of the public data following through Twitter
 iterator = twitter_stream.statuses.sample()
 
-# Print each tweet in the stream to the screen
+# Print each tweet in the stream to the screenÅ
 # Here we set it to stop after getting 1000 tweets.
 # You don't have to set it to stop, but can continue running
 # the Twitter API to collect data for days or even longer.
+# this is the case
 tweet_count = 500
 for tweet in iterator:
     tweet_count -= 1
@@ -37,4 +38,5 @@ for tweet in iterator:
     # The command below will do pretty printing for JSON data, try it out
     if tweet_count <= 0:
         break
-#huyilinshigougou
+#huyilinshigou
+#I love anna
