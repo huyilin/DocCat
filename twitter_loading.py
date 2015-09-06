@@ -40,5 +40,5 @@ for tweet in iterator:
         break
 #huyilinshigou
 #I love anna
-# I love anna
-# hihihihihi
+#I love anna
+#merge test
