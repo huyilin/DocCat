@@ -12,7 +12,7 @@ from sklearn import metrics
 # load tranning data, a list of documents(strings) and labels
 
 target_names = ['bulling trace', 'nonbullying trace']
-f = file('traning_data.p', 'r')
+f = file('training_data.p', 'r')
 data_train = cPickle.load(f)
 corpus_train = data_train[0]
 labels_train = np.array(data_train[1])
