@@ -41,8 +41,6 @@ test1_predicted = classfier.predict(test1_tf_idf)
 # for doc, label in zip(test1_docs, test1_predicted):
 #      print doc + '  => ' + str(label)
 
-
-
 # loading test data
 f = file('test_data.p', 'r')
 data_test = cPickle.load(f)
