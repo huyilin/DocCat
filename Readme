@@ -1,0 +1,7 @@
+Read Me:
+
+preporcess.py: processing raw twitter and counting them based on vocabulary
+
+seed_bully.py:  genearte bully seeds words
+
+feature_auto.py: based on word2vec and seed words to generate feature
