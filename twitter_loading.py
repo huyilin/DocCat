@@ -17,7 +17,7 @@ from twitter import Twitter, OAuth, TwitterHTTPError, TwitterStream
 import ConfigParser
 
 config = ConfigParser.RawConfigParser()
-configFilePath = 'token.conf'
+configFilePath = 'token_anna.conf'
 config.read(configFilePath)
 
 ACCESS_TOKEN = config.get('token', 'ACCESS_TOKEN')
