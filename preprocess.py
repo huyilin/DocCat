@@ -62,7 +62,7 @@ def load_vocab(filepah):
 
 
 #defining global variables
-corpus_path = 'datasets//tweetID_text.txt'
+corpus_path = 'data//tweetID_text.txt'
 messages = []
 index_list = []
 processed_corpus=[]  # store the processed corpus

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'anna'
+from datetime import datetime
 
 # Import the necessary package to process data in JSON format
 try:
@@ -32,11 +33,14 @@ i = 0
 while True:
     try:
         twitter_stream = TwitterStream(auth=oauth)
-        iterator = twitter_stream.statuses.filter(locations= "103.516987, 1.243245, 104.993955 , 1.477511", language = "en")
+        # iterator = twitter_stream.statuses.filter(locations= "103.588489, 1.233231, 103.994018 , 1.487514", language = "en")
+        iterator = twitter_stream.statuses.filter(language = "en")
         for tweet in iterator:
             if 'text' in tweet:
-                content = tweet['created_at'] + ',' +tweet['text'] + '\n'
-            file = open('data/' + '2015-10-11' + '.csv', 'a')
+                content = tweet['created_at'] + ' || ' +tweet['text'] + ' || '' + \n'
+                print content
+            date = str(datetime.utcnow().now().date())
+            file = open('download/' + date + '.csv', 'a')
             file.write(content)
             i = i + 1
             print i
