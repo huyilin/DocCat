@@ -30,7 +30,7 @@ def get_features():
     tfidf_transformer = TfidfTransformer()
     tfidf_train = tfidf_transformer.fit_transform(matrix)
 
-    f2 = file(r'vocab_s_50.p', 'r')
+    f2 = file(r'data/vocab_s_50.p', 'r')
     extended_bad = cPickle.load(f2)
     bword_train = extended_bad[0]
     weight_train = np.array(extended_bad[1])
@@ -39,15 +39,13 @@ def get_features():
     # for i in range(len(weight_train)):
     # ebow_train[i] = ebow_train[i] * weight_train[i]
 
-    svd_transformer = TruncatedSVD(n_components=100, algorithm='randomized', n_iter=10, random_state=42)
+    svd_transformer = TruncatedSVD(n_components=10, algorithm='randomized', n_iter=10, random_state=42)
 
     svd_train = svd_transformer.fit_transform(matrix)
 
-
-
     # features_train = np.concatenate((tfidf_train,ebow_train), axis=0)
     features_train = scipy.sparse.hstack((tfidf_train, ebow_train, svd_train), format='csr')
-    return (features_train, labels_train)
+    return (features_train, labels_train, vectorizer, tfidf_transformer, vectorizer_extendted, svd_transformer)
 
 
 def get_classifier(features_train, labels_train):
@@ -63,22 +61,16 @@ def get_classifier(features_train, labels_train):
     # classifier_svm = svm_classifier.fit(features_train,labels_train)
 
 
-features_train, labels_train = get_features()
+features_train, labels_train, vectorizer, tfidf_transformer, vectorizer_extendted, svd_transformer = get_features()
 nb_classifier = get_classifier(features_train, labels_train)
 
 # test the classifier using test documents
 test1_docs = ['good morning, how are you?', 'you are a fucking bitch, idiot, asshole',
               'Dont bullying your friend', 'I love anna']
 
-vectorizer = CountVectorizer()
-test1_matrix = vectorizer.fit_transform(test1_docs)
-tfidf_transformer = TfidfTransformer()
-test1_tf_idf = tfidf_transformer.fit_transform(test1_matrix)
-svd_transformer = TruncatedSVD(n_components=10, algorithm='randomized', n_iter=10, random_state=42)
-test1_svd = svd_transformer.fit_transform(test1_matrix)
-f2 = file(r'vocab_s_50.p', 'r')
-extended_bad = cPickle.load(f2)
-vectorizer_extendted = CountVectorizer().fit(extended_bad[0].keys())
+test1_matrix = vectorizer.transform(test1_docs)
+test1_tf_idf = tfidf_transformer.transform(test1_matrix)
+test1_svd = svd_transformer.transform(test1_matrix)
 test1_ebow = vectorizer_extendted.transform(test1_docs)
 test1_features = scipy.sparse.hstack((test1_tf_idf, test1_ebow, test1_svd), format='csr')
 
